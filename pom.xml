@@ -23,7 +23,7 @@
 			<plugin>
   <groupId>org.mule.tools.maven</groupId>
   <artifactId>mule-maven-plugin</artifactId>
-  <version>3.2.0</version>
+  <version>${mule.maven.plugin.version}</version>
   <extensions>true</extensions>
   <configuration>
     <deploymentType>cloudHub2</deploymentType>
@@ -35,6 +35,7 @@
     <runtimeVersion>${app.runtime}</runtimeVersion>
     <workers>1</workers>
     <workerType>${workerType}</workerType>
+    <region>${ap.region}</region> <!-- ex: us-east-1, eu-west-1 -->
   </configuration>
 </plugin>
 			

@@ -24,38 +24,28 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
-			<plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <classifier>mule-application</classifier>
-                    <cloudhub2Deployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
+			
+            <plugin>
+  <groupId>org.mule.tools.maven</groupId>
+  <artifactId>mule-maven-plugin</artifactId>
+  <version>3.7.1</version>
+  <extensions>true</extensions>
+  <configuration>
+    <cloudhub2Deployment>
+     <uri>https://anypoint.mulesoft.com</uri>
                         <provider>MC</provider>
                         <environment>test</environment>
                         <target>Cloudhub-US-East-2</target>
-                        <server>testRepo</server> 
-                        <applicationName>${project.artifactId}</applicationName>
-						<releaseChannel>NONE</releaseChannel>
-                        <replicas>1</replicas>
-                        <vCores>0.1</vCores>
-                        <deploymentSettings>
-                            <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-                        </deploymentSettings>
-                        <!-- Start: SECURED PROPERTIES CI/CD -->
-						
-						<!-- End: SECURED PROPERTIES CI/CD -->
-
-						<!-- use `properties` for non-secured values -->
-						<!-- <properties>
-							<env>dev</env>
-						</properties> -->
-
-                    </cloudhub2Deployment>
-                </configuration>
-            </plugin>
+      <muleVersion>${muleVersion}</muleVersion>
+      <username>Syamala_Personal</username>
+      <password>Syam@562</password>
+      <applicationName>test-project-api</applicationName>
+      <replicas>1</replicas>
+      <vCores>1</vCores>
+     
+    </cloudhub2Deployment>
+  </configuration>
+</plugin>
 		</plugins>
 	</build>
 

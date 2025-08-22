@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b91fe633-5342-4894-9944-eb66375e6bcd" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="test-project-apiFlow" doc:id="cb792d95-7e17-494e-8e77-856e3ef078bc" >
+		<http:listener doc:name="Listener" doc:id="00ab2de0-3614-44f2-b773-55ed97382ebc" config-ref="HTTP_Listener_config" path="/operations"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a2b4c562-f6b2-4c09-bab3-cac5d144f178" message='#["Received payload :" ++ write(payload,"application/json")]'/>
+		<ee:transform doc:name="Transform Message" doc:id="47e095bc-daab-4cf4-b7d0-425dd7741942" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"add" : payload.a  + payload.b,
+	"sub": 	payload.a  - payload.b,
+	"mul": payload.a  * payload.b,
+	"div": payload.a  / payload.b,
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

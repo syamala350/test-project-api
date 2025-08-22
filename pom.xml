@@ -4,7 +4,7 @@
 
 	<groupId>42d07d36-abd7-4652-864f-1e9a4ce11fb1</groupId>
 	<artifactId>test-project-api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>test-project-api</name>
@@ -42,6 +42,9 @@
       <applicationName>test-project-api</applicationName>
       <replicas>1</replicas>
       <vCores>1</vCores>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>${project.artifactId}</artifactId>
+      <version>${project.version}</version>
      
     </cloudhub2Deployment>
   </configuration>

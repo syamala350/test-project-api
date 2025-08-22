@@ -36,7 +36,7 @@
                         <provider>MC</provider>
                         <environment>test</environment>
                         <target>Cloudhub-US-East-2</target>
-      <muleVersion>${muleVersion}</muleVersion>
+      <muleVersion>4.9.0</muleVersion>
       <username>Syamala_Personal</username>
       <password>Syam@562</password>
       <applicationName>test-project-api</applicationName>

@@ -19,31 +19,25 @@
 
 	<build>
 		<plugins>
+			
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration> 
-				<cloudHubDeployment> 
-				<uri>https://anypoint.mulesoft.com/</uri> 
-				<muleVersion>${app.runtime}</muleVersion> 
-				<username>${ap.username}</username> 
-				<password>${ap.password}</password> 
-				<applicationName>${project.artifactId}</applicationName> 
-				<environment>${env}</environment> 
-				<workerType>${workerType}</workerType> 
-				<workers>1</workers> 
-				<objectStoreV2>true</objectStoreV2> 
-				</cloudHubDeployment> 
-				</configuration> 
-				
-			</plugin>
+  <groupId>org.mule.tools.maven</groupId>
+  <artifactId>mule-maven-plugin</artifactId>
+  <version>3.2.0</version>
+  <extensions>true</extensions>
+  <configuration>
+    <deploymentType>cloudHub2</deploymentType>
+    <anypointUsername>${ap.username}</anypointUsername>
+    <anypointPassword>${ap.password}</anypointPassword>
+    <organization>${ap.org}</organization>
+    <environment>${env}</environment>
+    <applicationName>${project.artifactId}</applicationName>
+    <runtimeVersion>${app.runtime}</runtimeVersion>
+    <workers>1</workers>
+    <workerType>${workerType}</workerType>
+  </configuration>
+</plugin>
+			
 		</plugins>
 	</build>
 

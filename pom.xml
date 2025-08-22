@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>42d07d36-abd7-4652-864f-1e9a4ce11fb1</groupId>
 	<artifactId>test-project-api</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
@@ -19,26 +19,43 @@
 
 	<build>
 		<plugins>
-			
 			<plugin>
-  <groupId>org.mule.tools.maven</groupId>
-  <artifactId>mule-maven-plugin</artifactId>
-  <version>${mule.maven.plugin.version}</version>
-  <extensions>true</extensions>
-  <configuration>
-    <deploymentType>cloudHub2</deploymentType>
-    <anypointUsername>${ap.username}</anypointUsername>
-    <anypointPassword>${ap.password}</anypointPassword>
-    <organization>${ap.org}</organization>
-    <environment>${env}</environment>
-    <applicationName>${project.artifactId}</applicationName>
-    <runtimeVersion>${app.runtime}</runtimeVersion>
-    <workers>1</workers>
-    <workerType>${workerType}</workerType>
-    <region>${ap.region}</region> <!-- ex: us-east-1, eu-west-1 -->
-  </configuration>
-</plugin>
-			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.2.0</version>
+			</plugin>
+			<plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-maven-plugin</artifactId>
+                <version>${mule.maven.plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <classifier>mule-application</classifier>
+                    <cloudhub2Deployment>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <provider>MC</provider>
+                        <environment>test</environment>
+                        <target>Cloudhub-US-East-2</target>
+                        <server>testRepo</server> 
+                        <applicationName>${project.artifactId}</applicationName>
+						<releaseChannel>NONE</releaseChannel>
+                        <replicas>1</replicas>
+                        <vCores>0.1</vCores>
+                        <deploymentSettings>
+                            <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+                        </deploymentSettings>
+                        <!-- Start: SECURED PROPERTIES CI/CD -->
+						
+						<!-- End: SECURED PROPERTIES CI/CD -->
+
+						<!-- use `properties` for non-secured values -->
+						<!-- <properties>
+							<env>dev</env>
+						</properties> -->
+
+                    </cloudhub2Deployment>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -70,6 +87,12 @@
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+            <id>testRepo</id>
+            <name>Private Exchange repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <layout>default</layout>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -83,5 +106,14 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	
+	<distributionManagement>
+        <repository>
+            <id>testRepo</id>
+            <name>Corporate Repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 
 </project>
